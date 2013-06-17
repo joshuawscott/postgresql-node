@@ -1,4 +1,6 @@
 /*jslint browser: false, node: true, indent: 2 */
+"use strict";
+
 var assert = require('assert');
 var Target = require('../lib/postgresql_connection');
 var testObj = {
@@ -75,11 +77,12 @@ var testObj = {
     database: 'database'
   }
 };
-
-var _parseConnectString = function(str) {
-  return Target._parseConnectString(str);
+var str;
+var parseConnectString = function (str) {
+  return Target.parseConnectString(str);
 };
-var retval;
-for (var str in testObj) {
-  assert.deepEqual(_parseConnectString(str), testObj[str]);
+for (str in testObj) {
+  if (testObj.hasOwnProperty(str)) {
+    assert.deepEqual(parseConnectString(str), testObj[str]);
+  }
 }
