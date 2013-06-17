@@ -1,0 +1,22 @@
+{
+  "name": "postgresql-node",
+  "version": "0.1.0",
+  "description": "PostgreSQL low-level API in pure javascript",
+  "keywords": ["postgres", "postgresql", "pg", "database"],
+  "homepage": "http://github.com/joshuawscott/postgresql-node",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joshuawscott/postgresql-node.git"
+  },
+  "author": "Joshua Scott <joshua.scott@gmail.com>",
+  "main": "./lib",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": ""
+
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  }
+}
