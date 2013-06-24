@@ -6,18 +6,37 @@ http://www.postgresql.org/docs/9.2/interactive/protocol.html
 
 ## Example:
 
-At this point, passwords are not supported (maybe in v 0.1.0)
 You will need to edit listener.js to put in your username/database in the options object.
 For the default install of PostgreSQL on Mac OS X, no password is set by default, so you should be able to just change the username.
-listener.js creates a listener on port 55432 (
 
-node lib/listener.js
-(in another window):
-node lib/client.js (this sends a query to the server)
+listener.js creates a listener on port 55432.
+
+`node lib/listener.js`
+
+(in another window): `node lib/client.js` (this sends a query to the server)
+
+## Rolling your own:
+
+    var PG = require('./lib/postgresql_connection');
+    options = {hostname: localhost, username: pguser, port: 5432, database: pguser};
+    pgConnection = PG.connect(options);
+    pgConnection.on('connect', function () {
+      pgConnection.authenticate();
+    });
+    pgConnection.on('readyForQuery', function () {
+      pgConnection.query("SELECT NOW() AS current_time");
+    });
+
+See [the Wiki](https://github.com/joshuawscott/postgresql-node/wiki/PostgresqlConnection "PostgresqlConnection") for more.
 
 ## Current Features
 
-Parsing of some of PostgreSQL's backend messages:
+### High-level protocol
+listener.js implements the low-level protocol of postgresql_connection.js to give a higher-level protocol.
+You can send bare JSON over the network while listener.js is running, and
+
+### Low-level protocol
+Currently postgresql_connection.js implements the some of PostgreSQL's backend messages:
 * AuthenticationOk
 * BackendKeyData
 * CommandComplete
@@ -25,15 +44,16 @@ Parsing of some of PostgreSQL's backend messages:
 * ReadyForData
 * RowDescription
 
-Simple 'query' fu
+In addtion, it has .query(query) and .authenticate()
+The low-level protocol is event-based; simply listen for the event with a name corresponding to the documented PostgreSQL backend message.
 
-Event-based; simply listen for the event with a name corresponding to the documented PostgreSQL backend message.
 The names of the events are camelCased (first letter lowercase), but otherwise should be the same as the PG backend message.
 
 ## Target Features
 
+As of 0.0.1, passwords are not implemented.
+
 * Low-level API implementing the entire protocol
-* Mid-level API wrapping some of the message calls to allow easy queries
 
 ## License
 
