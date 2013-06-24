@@ -33,7 +33,8 @@ See [the Wiki](https://github.com/joshuawscott/postgresql-node/wiki/PostgresqlCo
 
 ### High-level protocol
 listener.js implements the low-level protocol of postgresql_connection.js to give a higher-level protocol.
-You can send bare JSON over the network while listener.js is running, and
+You can send bare JSON over the network while listener.js is running, and it will return JSON representations of the server reply.
+Currently includes error & notice messages, query, and result ("SELECT 99", "INSERT 1", e.g.) messages.
 
 ### Low-level protocol
 Currently postgresql_connection.js implements the some of PostgreSQL's backend messages:
