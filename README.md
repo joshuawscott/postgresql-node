@@ -7,21 +7,25 @@ http://www.postgresql.org/docs/9.2/interactive/protocol.html
 ## Example:
 
 At this point, passwords are not supported (maybe in v 0.1.0)
-You will need to edit example.js to put in your username/database in the options object.
+You will need to edit listener.js to put in your username/database in the options object.
 For the default install of PostgreSQL on Mac OS X, no password is set by default, so you should be able to just change the username.
-example.js creates a listener on port 55432 (
+listener.js creates a listener on port 55432 (
 
-node lib/example.js
+node lib/listener.js
 (in another window):
-echo '{"query":"SELECT NOW() AS current_time"}' | nc 55432
+node lib/client.js (this sends a query to the server)
 
 ## Current Features
 
 Parsing of some of PostgreSQL's backend messages:
 * AuthenticationOk
 * BackendKeyData
+* CommandComplete
 * DataRow
+* ReadyForData
 * RowDescription
+
+Simple 'query' fu
 
 Event-based; simply listen for the event with a name corresponding to the documented PostgreSQL backend message.
 The names of the events are camelCased (first letter lowercase), but otherwise should be the same as the PG backend message.
