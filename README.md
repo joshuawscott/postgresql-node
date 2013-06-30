@@ -1,6 +1,6 @@
 # postgresql-node
 
-A pure Javascript implementation of PostgreSQL's network protocol.
+A pure Node.js Javascript implementation of PostgreSQL's network protocol.
 
 http://www.postgresql.org/docs/9.2/interactive/protocol.html
 
@@ -37,7 +37,7 @@ You can send bare JSON over the network while listener.js is running, and it wil
 Currently includes error & notice messages, query, and result ("SELECT 99", "INSERT 1", e.g.) messages.
 
 ### Low-level protocol
-Currently postgresql_connection.js implements the some of PostgreSQL's backend messages:
+Currently postgresql_connection.js implements parsing some of PostgreSQL's backend messages:
 * AuthenticationOk
 * BackendKeyData
 * CommandComplete
