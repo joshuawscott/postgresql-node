@@ -39,10 +39,19 @@ Currently includes error & notice messages, query, and result ("SELECT 99", "INS
 ### Low-level protocol
 Currently postgresql_connection.js implements parsing some of PostgreSQL's backend messages:
 * AuthenticationOk
+* AuthenticationCleartextPassword
+    - Automatically replies with the password
+* AuthenticationMD5Password
+    - Automatically replies with the encrypted password
 * BackendKeyData
 * CommandComplete
+* CopyDone
 * DataRow
-* ReadyForData
+* ErrorResponse
+* NoData
+* NoticeResponse
+* ParameterStatus
+* ReadyForQuery
 * RowDescription
 
 In addtion, it has .query(query) and .authenticate()
@@ -52,7 +61,7 @@ The names of the events are camelCased (first letter lowercase), but otherwise s
 
 ## Target Features
 
-As of 0.1.1, only plaintext and md5 passwords are implemented.
+As of 0.1.1, plaintext and md5 passwords will be implemented. (also in the current repo)
 
 * Low-level API implementing the entire protocol
 
