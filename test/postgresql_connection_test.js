@@ -2,7 +2,7 @@
 "use strict";
 console.log("Testing PostgresqlConnection");
 var assert = require('assert');
-var Target = require('../lib/postgresql_connection');
+var postgresqlConnection = require('../lib/postgresql_connection');
 var testObj = {
   "postgresql://hostname": {
     comm: 'postgresql',
@@ -79,7 +79,7 @@ var testObj = {
 };
 var str;
 var parseConnectString = function (str) {
-  return Target.parseConnectString(str);
+  return postgresqlConnection.parseConnectString(str);
 };
 console.log("#parseConnectString parses any possible string correctly");
 for (str in testObj) {

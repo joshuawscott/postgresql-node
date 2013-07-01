@@ -117,6 +117,6 @@ assert.deepEqual(buf, expected);
 expected = new Buffer([0x53, // 'S'
   0, 0, 0, 0x4]);
 
-console.log("#sync returns correct buffer without optional options");
+console.log("#sync returns correct buffer");
 buf = messageSender.sync();
 assert.deepEqual(buf, expected);
