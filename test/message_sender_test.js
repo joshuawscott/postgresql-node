@@ -66,20 +66,21 @@ expected = new Buffer([0x70, // 'p'
   0x66, 0x6F, 0x6F, 0]); // 'foo\0'
 
 console.log("#passwordMessage returns correct buffer");
-buf = messageSender.passwordMessage('foo', false);
+buf = messageSender.passwordMessage('foo', false, 'user', new Buffer([0x00, 0x00, 0x00, 0x00]));
 assert.deepEqual(buf, expected);
 
 console.log("#passwordMessage defaults to unencrypted");
 buf = messageSender.passwordMessage('foo');
 assert.deepEqual(buf, expected);
 
-console.log("#passwordMessage throws when encryption requested");
-assert.throws(
-  function () {
-    messageSender.passwordMessage('foo', true);
-  },
-  Error
-);
+console.log("#passwordMessage sends encrypted password");
+expected = new Buffer([
+  0x70,
+  0, 0, 0, 0x28,
+  0x6d, 0x64, 0x35, 0x62, 0x65, 0x62, 0x38, 0x33, 0x32, 0x61, 0x30, 0x31, 0x38, 0x61, 0x36, 0x31, 0x66, 0x38, 0x66, 0x63, 0x38, 0x33, 0x34, 0x35, 0x63, 0x66, 0x39, 0x34, 0x66, 0x36, 0x66, 0x39, 0x35, 0x64, 0x38, 0
+]);
+buf = messageSender.passwordMessage('foo', true, 'foo', new Buffer([0x61, 0x61, 0x61, 0x61]));
+assert.deepEqual(buf, expected);
 
 // query
 expected = new Buffer([0x51, // 'Q'

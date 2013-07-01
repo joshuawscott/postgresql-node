@@ -52,7 +52,7 @@ The names of the events are camelCased (first letter lowercase), but otherwise s
 
 ## Target Features
 
-As of 0.0.1, passwords are not implemented.
+As of 0.1.1, only plaintext and md5 passwords are implemented.
 
 * Low-level API implementing the entire protocol
 

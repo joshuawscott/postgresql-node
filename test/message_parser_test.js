@@ -52,6 +52,7 @@ result = messageParser.Parse(buf);
 assert.deepEqual(result, expected);
 
 //// parseMessage
+
 // authenticationOk
 console.log("#parseMessage authenticationOk");
 expected = {type: 'R', objLength: 8, data: new Buffer([0, 0, 0, 0])};
@@ -63,10 +64,20 @@ assert.deepEqual(messageParser.parseMessage(messageObj), expected);
 // TODO
 
 // authenticationCleartextPassword
-// TODO
+console.log("#parseMessage authenticationCleartextPassword");
+expected = {type: 'R', objLength: 8, data: new Buffer([0, 0, 0, 3])};
+expected.eventName = 'authenticationCleartextPassword';
+messageObj = {type: 'R', objLength: 8, data: new Buffer([0, 0, 0, 3])};
+assert.deepEqual(messageParser.parseMessage(messageObj), expected);
 
 // authenticationMD5Password
-// TODO
+console.log("#parseMessage authenticationMD5Password");
+expected = {type: 'R', objLength: 12, data: new Buffer([0, 0, 0, 5, 0x61, 0x61, 0x61, 0x61])};
+expected.eventName = 'authenticationMD5Password';
+expected.salt = new Buffer([0x61, 0x61, 0x61, 0x61]);
+messageObj = {type: 'R', objLength: 12, data: new Buffer([0, 0, 0, 5, 0x61, 0x61, 0x61, 0x61])};
+assert.deepEqual(messageParser.parseMessage(messageObj), expected);
+
 
 // authenticationGSS
 // TODO
