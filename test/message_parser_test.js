@@ -98,10 +98,18 @@ messageObj = {type: 'K', objLength: 12, data: new Buffer([0, 0, 0, 0x01, 0, 0, 0
 assert.deepEqual(messageParser.parseMessage(messageObj), expected);
 
 // bindComplete
-// TODO
+console.log("#parseMessage bindComplete");
+expected = {type: '2', objLength: 4, data: new Buffer(0)};
+expected.eventName = 'bindComplete';
+messageObj = {type: '2', objLength: 4, data: new Buffer(0)};
+assert.deepEqual(messageParser.parseMessage(messageObj), expected);
 
 // closeComplete
-// TODO
+console.log("#parseMessage closeComplete");
+expected = {type: '3', objLength: 4, data: new Buffer(0)};
+expected.eventName = 'closeComplete';
+messageObj = {type: '3', objLength: 4, data: new Buffer(0)};
+assert.deepEqual(messageParser.parseMessage(messageObj), expected);
 
 // commandComplete
 console.log("#parseMessage commandComplete");
@@ -112,9 +120,13 @@ expected.commandCompleteResult = 'SELECT 1';
 messageObj = {type: 'C', objLength: 13, data: new Buffer([0x53, 0x45, 0x4c, 0x45, 0x43, 0x54, 0x20, 0x31, 0])};
 assert.deepEqual(messageParser.parseMessage(messageObj), expected);
 
-
 // copyData
-// TODO
+console.log("#parseMessage copyData");
+expected = {type: 'd', objLength: 12, data: new Buffer([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08])};
+expected.copyData = expected.data.toString('utf-8');
+expected.eventName = 'copyData';
+messageObj = {type: 'd', objLength: 12, data: new Buffer([0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08])};
+assert.deepEqual(messageParser.parseMessage(messageObj), expected);
 
 // copyDone
 console.log("#parseMessage copyDone");
@@ -125,6 +137,7 @@ messageObj = {type: 'c', objLength: 4};
 assert.deepEqual(messageParser.parseMessage(messageObj), expected);
 
 // copyInResponse
+
 // TODO
 
 // copyOutResponse
