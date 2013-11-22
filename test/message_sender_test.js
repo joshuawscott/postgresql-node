@@ -27,7 +27,13 @@ buf = messageSender.close('s', 'foo');
 assert.deepEqual(buf, expected);
 
 // copyData
-// TODO
+expected = new Buffer([0x64, // 'd'
+  0, 0, 0, 0x0b, // 44 (length)
+  0x36, 0x2c, 0x41, 0x2c, 0x46, 0x6f, 0x6f]); // '6,A,Foo'
+
+console.log("#copyData returns correct buffer");
+buf = messageSender.copyData('6,A,Foo');
+assert.deepEqual(buf, expected);
 
 // copyDone
 expected = new Buffer([0x63, // 'c'
