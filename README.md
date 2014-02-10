@@ -67,7 +67,7 @@ As of 0.1.1, plaintext and md5 passwords will be implemented. (also in the curre
 
 ## License
 
-Copyright &copy; 2013 Joshua Scott
+Copyright &copy; 2014 Joshua Scott
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
